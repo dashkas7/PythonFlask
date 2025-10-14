@@ -105,9 +105,12 @@ def homework():
 @login_required
 def rates():
     url = "https://www.nbrb.by/api/exrates/rates?periodicity=0"
-    data = requests.get(url).json()
-    return render_template("rates.html", rates=data)
-
+    try:
+        response = requests.get(url, timeout=5)
+        data = response.json()
+        return render_template("rates.html", rates=data)
+    except Exception as e:
+        return f"Ошибка при получении данных: {e}"
 @app.route("/login/", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
