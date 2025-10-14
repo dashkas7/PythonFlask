@@ -101,18 +101,6 @@ def weather_city(city=None):
 def homework():
     return render_template("homework.html")
 
-@app.route("/rates/")
-@login_required
-def rates():
-    url = "https://api.exchangerate.host/latest?base=BYN"
-    try:
-        response = requests.get(url, timeout=10)
-        response.raise_for_status()
-        data = response.json()
-        return render_template("rates.html", rates=data["rates"])
-    except Exception as e:
-        return f"Ошибка при получении данных: {e}"
-
 
 @app.route("/login/", methods=["GET", "POST"])
 def login():
