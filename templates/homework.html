@@ -1,0 +1,319 @@
+{% extends "base.html" %}
+
+{% block title %}Домашка (1–12){% endblock %}
+
+{% block content %}
+<style>
+  /* локальные стили только для этой страницы */
+  .hw section{
+    width:min(980px,92%);
+    background:#f5f6f8f0;
+    padding:20px;
+    margin:12px auto;
+    border-radius:16px;
+    box-shadow:0 0 18px rgba(0,0,0,.25);
+    text-align:left;
+  }
+  .hw h2{margin:0 0 14px;text-align:center;color:#4a3fdb}
+
+  /* Таблицы (ч/б базовая сетка) */
+  .hw table{border-collapse:collapse;margin:10px auto;width:96%}
+  .hw th,.hw td{border:1px solid #111;padding:8px 10px;text-align:center}
+  .hw caption{caption-side:top;font-weight:700;margin-bottom:6px}
+
+  /* Задание 4 — бордовая шапка */
+  .hw .t-red th{background:#8a2d2d;color:#fff}
+  .hw .t-red td{background:#fff6e6}
+  .hw .t-red tr+tr td{border-top:1px solid #c27c7c}
+
+  /* Задание 5 — бирюза/жёлтый */
+  .hw .t-colored th{background:#555;color:#fff}
+  .hw .t-colored td:nth-child(2n){background:#bfeeea}
+  .hw .t-colored td:nth-child(1),
+  .hw .t-colored td:nth-child(4){background:#fff6a6}
+
+  /* Joy of TeX */
+  .hw .tex{font-size:64px;font-family:Georgia,serif;text-align:center}
+  .hw .tex .e{position:relative;top:.25em;font-size:.75em;letter-spacing:-.05em}
+
+  /* Евтушенко */
+  .hw .poem-wrap{text-align:center}
+  .hw .poem-wrap h3{font-family:Georgia,serif;font-size:36px;margin:0 0 6px}
+  .hw .poem-year{letter-spacing:2px;margin:0 0 12px}
+  .hw .poem{display:inline-block;text-align:left;white-space:pre;line-height:1.35;border-left:3px solid #ddd;padding-left:12px}
+
+  /* Карта сокровищ */
+  .hw .map-box{position:relative;border-top:3px solid #444;padding-top:10px}
+  .hw .map{display:block;max-width:100%;border:2px solid #333;border-radius:6px;margin:0 auto}
+  .hw .pin{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);background:#fff;border:1px solid #333;border-radius:6px;padding:4px 8px;box-shadow:0 1px 6px rgba(0,0,0,.25)}
+  .hw progress{width:80%;height:18px}
+
+  /* Генераторы */
+  .hw .g h3{font-size:28px;margin:0 0 6px;text-align:center}
+
+  /* Стих (задание 9) */
+  .hw .poem2 h3{font-size:32px;margin:0 0 8px;text-align:center}
+  .hw .poem2 .text{font-size:20px;line-height:1.35}
+
+  /* Кнопка «На главную» внизу (если понадобится) */
+  .hw .btn{
+    display:inline-block;
+    background:#afe5f9fd;
+    color:#000;
+    text-decoration:none;
+    font-weight:700;
+    padding:10px 22px;
+    border-radius:12px;
+    box-shadow:0 0 15px rgba(0,0,0,.25);
+    transition:all .25s;
+  }
+  .hw .btn:hover{background:#b6ffd1ff;transform:scale(1.08);box-shadow:0 0 25px rgba(16,132,47,.64)}
+  .hw .btn:active{transform:scale(.95)}
+</style>
+
+<div class="hw">
+
+  <!-- 1. Joy of TeX -->
+  <section id="task1">
+    <h2>1. Joy of TeX</h2>
+    <div class="tex">Joy of T<span class="e">E</span>X</div>
+  </section>
+
+  <!-- 2. Евгений Евтушенко -->
+  <section id="task2">
+    <h2>2. Евгений Евтушенко</h2>
+    <div class="poem-wrap">
+      <h3>Евгений Евтушенко</h3>
+      <div class="poem-year">— 1955 —</div>
+      <div class="poem">
+Бывало, спит у ног собака,
+костер занявшийся гудит,
+и женщина из полумрака
+глазами зыбкими глядит.
+
+Потом под пихтою приляжет
+на куртку рыжую мою
+и мне,
+        задумываясь,
+                 скажет:
+«А ну-ка, спой!..» —
+                      и я пою.
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Добыча драгоценных камней (1483 объединено по 2010; у алмазов 2012+2014 → 238) -->
+  <section id="task3">
+    <h2>3. Таблица: Добыча драгоценных камней</h2>
+    <table>
+      <caption>Добыча драгоценных камней</caption>
+      <tr>
+        <th></th><th>2010</th><th>2012</th><th>2014</th>
+      </tr>
+      <tr>
+        <td style="text-align:left">Сапфиры</td>
+        <td rowspan="2">1483</td>
+        <td>4532</td>
+        <td>6743</td>
+      </tr>
+      <tr>
+        <td style="text-align:left">Рубины</td>
+        <td>3835</td>
+        <td>7482</td>
+      </tr>
+      <tr>
+        <td style="text-align:left">Алмазы</td>
+        <td>683</td>
+        <td colspan="2">238</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- 4. Красная шапка; пустая верхняя левая ячейка, 2004 над «43» -->
+  <section id="task4">
+    <h2>4. Таблица (бордовая шапка)</h2>
+    <table class="t-red">
+      <tr>
+        <th></th><th>2004</th><th>2005</th><th>2006</th>
+      </tr>
+      <tr>
+        <td>Рубины</td>
+        <td>43</td>
+        <td>51</td>
+        <td>79</td>
+      </tr>
+      <tr>
+        <td>Изумруды</td>
+        <td>28</td>
+        <td>34</td>
+        <td>48</td>
+      </tr>
+      <tr>
+        <td>Сапфиры</td>
+        <td>29</td>
+        <td>57</td>
+        <td>36</td>
+      </tr>
+      <tr>
+        <td>Аметисты</td>
+        <td>23</td>
+        <td>64</td>
+        <td>97</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- 5. Бирюзово-жёлтая таблица -->
+  <section id="task5">
+    <h2>5. Таблица (бирюзово-жёлтая)</h2>
+    <table class="t-colored">
+      <tr>
+        <th>Название</th><th>Цвет</th><th>Твердость по Моосу</th><th>Формула</th>
+      </tr>
+      <tr><td>Алмаз</td><td>Белый</td><td>10</td><td>C</td></tr>
+      <tr><td>Рубин</td><td>Красный</td><td>9</td><td>Al₂O₃</td></tr>
+      <tr><td>Аметист</td><td>Голубой</td><td>7</td><td>SiO₂</td></tr>
+      <tr><td>Изумруд</td><td>Зелёный</td><td>8</td><td>Be₃Al₂(SiO₃)₆</td></tr>
+      <tr><td>Сапфир</td><td>Голубой</td><td>9</td><td>Al₂O₃</td></tr>
+    </table>
+  </section>
+
+  <!-- 6. Карта сокровищ -->
+  <section id="task6">
+    <h2>6. Карта сокровищ</h2>
+    <div class="map-box">
+      <img class="map" src="https://img.freepik.com/premium-vector/map-treasures-paper-parchment_8071-3421.jpg" alt="Карта сокровищ">
+      <div class="pin">Клад</div>
+    </div>
+    <p style="text-align:center"><b>Пройдено:</b></p>
+    <p style="text-align:center"><progress value="40" max="100"></progress></p>
+  </section>
+
+  <!-- 7. Химические элементы -->
+  <section id="task7">
+    <h2>7. Химические элементы</h2>
+    <table>
+      <tr><th>Номер</th><th>Название</th><th>Символ</th><th>Год</th><th>Статья</th></tr>
+      <tr><td>1</td><td><a href="#">Водород</a></td><td><b>H</b></td><td>1766</td><td>📝</td></tr>
+      <tr><td>2</td><td><a href="#">Гелий</a></td><td><b>He</b></td><td>1895</td><td>📝</td></tr>
+      <tr><td>3</td><td><a href="#">Бор</a></td><td><b>B</b></td><td>1808</td><td>📝</td></tr>
+    </table>
+  </section>
+
+  <!-- 8. Генераторы -->
+  <section id="task8" class="g">
+    <h2>8. Генераторы</h2>
+    <h3>Генераторы</h3>
+    <ul>
+      <li>Цвета
+        <ul>
+          <li>Color Mixers</li>
+          <li>Color Tester</li>
+          <li>Color Pallete</li>
+        </ul>
+      </li>
+      <li>Фавиконы
+        <ol>
+          <li>Favicon.cc
+            <ul>
+              <li><a href="#">Скачать</a></li>
+              <li><a href="#">Демо</a></li>
+            </ul>
+          </li>
+          <li>WebLab Favicon</li>
+        </ol>
+      </li>
+      <li>Фоны
+        <ul>
+          <li>BgMaker</li>
+          <li>StripeGenerator</li>
+        </ul>
+      </li>
+      <li>Изображения
+        <ol>
+          <li>Buttonator</li>
+          <li>AjaxLoad</li>
+        </ol>
+      </li>
+    </ul>
+  </section>
+
+  <!-- 9. Стихотворение -->
+  <section id="task9" class="poem2">
+    <h2>9. Стихотворение</h2>
+    <h3>Стихотворение</h3>
+    <div class="text">
+      Мириады маленьких дел<br>
+      Пьют по капле гаснущий день,<br>
+      А <i>дела большие</i> сушит жажда.<br>
+      Оставляя все на «потом»,<br>
+      Прозреваем задним числом,<br>
+      Только день <b>не повторится</b> дважды.<br><br>
+      И.Тальков
+    </div>
+  </section>
+
+  <!-- 10. Заголовки и ссылка -->
+  <section id="task10">
+    <h2>10. Заголовки и ссылка</h2>
+    <div style="background:#e8e8d4;padding:16px;border-radius:10px">
+      <h1 style="color:#6b3f18;margin:0 0 10px">Заголовок первого уровня</h1>
+      <h2 style="color:#121212;margin:0 0 10px">Заголовок второго уровня</h2>
+      <h3 style="color:#8a633c;margin:0 0 14px">Заголовок третьего уровня</h3>
+      <p>Пример ссылки <a href="#">ведущей на другую страницу</a></p>
+    </div>
+  </section>
+
+  <!-- 11. Форма с датами/временем -->
+  <section id="task11">
+    <h2>11. Форма с датами</h2>
+    <form>
+      <label>Неделя: <input type="week"></label><br><br>
+      <label>Дата и время: <input type="datetime-local"></label><br><br>
+      <label>Месяц: <input type="month"></label><br><br>
+      <label>Время: <input type="time"></label><br><br>
+      <a class="btn" href="#">Отправить</a>
+    </form>
+  </section>
+
+  <!-- 12. Форма заявки в зоопарк -->
+  <section id="task12">
+    <h2>12. Форма заявки на работу в зоопарке</h2>
+    <form>
+      <fieldset>
+        <legend><b>Контактная информация</b></legend>
+        Имя * <input type="text" required><br><br>
+        Телефон <input type="tel"><br><br>
+        Email * <input type="email" required>
+      </fieldset>
+      <br>
+      <fieldset>
+        <legend><b>Персональная информация</b></legend>
+        Возраст * <input type="number" min="1" max="120" required><br><br>
+        Пол
+        <select>
+          <option>Женщина</option>
+          <option>Мужчина</option>
+        </select><br><br>
+        Перечислите личные качества<br>
+        <textarea rows="5" style="width:100%"></textarea>
+      </fieldset>
+      <br>
+      <fieldset>
+        <legend><b>Выберите ваших любимых животных</b></legend>
+        <label><input type="checkbox"> Зебра</label>
+        <label><input type="checkbox"> Кошка</label>
+        <label><input type="checkbox"> Анаконда</label>
+        <label><input type="checkbox"> Человек</label><br>
+        <label><input type="checkbox"> Слон</label>
+        <label><input type="checkbox"> Антилопа</label>
+        <label><input type="checkbox"> Голубь</label>
+        <label><input type="checkbox"> Краб</label>
+      </fieldset>
+      <br>
+      <a class="btn" href="#">Отправить информацию</a>
+    </form>
+  </section>
+
+</div>
+{% endblock %}

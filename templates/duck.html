@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Уточки{% endblock %}
+
+{% block content %}
+ <style>
+        h1   {font-family:Comic Sans MS; 
+                text-align:center; 
+                color: rgb(128, 66, 0); 
+                margin-left: 20px; }
+
+        p    {font-family:Comic Sans MS; 
+                font-family: verdana; 
+                font-size: 30px; }
+
+      img {
+            width: 500px;                 
+            height: 400px;                               
+            border-radius: 45px;      
+            display: block;   
+            margin: 0 auto 20px auto;
+         }
+
+         button {  background-color: #fee2a5fd;
+            font-family:Comic Sans MS;
+            border-radius: 12px; 
+            padding: 10px 24px; 
+            font-size: 20px; 
+            margin: 10px;
+        box-shadow: 0 0 15px rgba(198, 202, 161, 0.85);
+        transform: scale(0.95); 
+    }
+        button:hover { background-color: rgb(251, 227, 160); 
+            box-shadow: 0 0 25px rgb(238, 204, 13);
+            transform: scale(1.05); 
+            transition: all 0.3s ease-in-out; }
+
+</style>
+  <h1>Рандомная уточка №{{duck_number}}</h1>
+<div 
+    style="text-align: center;">
+    <img src="{{duck_url}}" alt="Random Duck" style="max-width:600px; border-radius:10px;">
+    <button> 
+        <a style="color:black" href="/">На главную</a>
+        </button>
+</div>
+{% endblock %}

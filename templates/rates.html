@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Курсы белорусского рубля по отношению к иностранным валютам{% endblock %}
+
+{% block content %}
+  <h2>Курсы белорусского рубля по отношению к иностранным валютам</h2>
+  <table border="1" cellpadding="8">
+    <tr>
+      <th>Иностранная валюта</th>
+      <th>Наименование иностранной валюты</th>
+      <th>Курс</th>
+    </tr>
+    {% for rate in rates %}
+    <tr>
+      <td>{{ rate.Cur_Name }}</td>
+      <td>{{ rate.Cur_Abbreviation }}</td>
+      <td>{{ rate.Cur_OfficialRate }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+{% endblock %}
