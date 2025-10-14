@@ -113,6 +113,7 @@ def rates():
     except Exception as e:
         return f"Ошибка при получении данных: {e}"
 
+
 @app.route("/login/", methods=["GET", "POST"])
 def login():
     if request.method == "POST":

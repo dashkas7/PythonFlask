@@ -1,20 +1,18 @@
 {% extends "base.html" %}
 
-{% block title %}Курсы белорусского рубля по отношению к иностранным валютам{% endblock %}
+{% block title %}Курсы белорусского рубля{% endblock %}
 
 {% block content %}
-  <h2>Курсы белорусского рубля по отношению к иностранным валютам</h2>
+  <h2>Курсы белорусского рубля к иностранным валютам</h2>
   <table border="1" cellpadding="8">
     <tr>
-      <th>Иностранная валюта</th>
-      <th>Наименование иностранной валюты</th>
-      <th>Курс</th>
+      <th>Код валюты</th>
+      <th>Курс (1 BYN = ...)</th>
     </tr>
-    {% for rate in rates %}
+    {% for code, value in rates.items() %}
     <tr>
-      <td>{{ rate.Cur_Name }}</td>
-      <td>{{ rate.Cur_Abbreviation }}</td>
-      <td>{{ rate.Cur_OfficialRate }}</td>
+      <td>{{ code }}</td>
+      <td>{{ value }}</td>
     </tr>
     {% endfor %}
   </table>
