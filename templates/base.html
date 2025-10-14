@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Сайт{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body{ text-align: center;
+            background-color:#7872dbff;
+            font-family:"Comic Sans MS",cursive,sans-serif;
+            margin:0;
+            display:grid;
+            grid-template-rows:auto auto 1fr auto;
+            grid-template-areas:
+                "header"
+                "menu"
+                "main"
+                "footer";
+            min-height:100vh;
+        }
+        .header{grid-area:header}
+        .menu  {grid-area:menu}
+        .main  {grid-area:main}
+        .footer{grid-area:footer}
+
+        .header{
+            background:#9a5ce6;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:15px 30px;
+            border-radius:0 0 16px 16px;
+            box-shadow:0 2px 12px rgba(0,0,0,.2);
+            position:relative;
+            z-index:2;
+        }
+        .header h1{margin:0;color:#3b2d5b;font-size:28px}
+        .auth{display:flex;gap:12px;align-items:center}
+        .auth span{font-weight:bold;color:#3b2d5b}
+
+        
+        #menu-toggle{
+            position:absolute;
+            left:-9999px;
+        }
+
+        .menu-toggle-btn{
+            appearance:none;
+            border:none;
+            background:#afe5f9fd;
+            color:#000;
+            font-weight:bold;
+            border-radius:12px;
+            padding:8px 14px;
+            box-shadow:0 0 12px rgba(0,0,0,.25);
+            cursor:pointer;
+            transition:transform .2s, box-shadow .2s, background-color .2s;
+            user-select:none;
+        }
+        .menu-toggle-btn:hover{transform:scale(1.08); background:#b6ffd1ff}
+        .menu-toggle-btn:active{transform:scale(.95)}
+
+        
+        .menu{
+            max-height:0;
+            overflow:hidden;
+            opacity:0;
+            transition:max-height .45s ease, opacity .3s ease;
+            padding:0 20px; /* чтобы не прыгал контент при сворачивании */
+        }
+      
+        #menu-toggle:checked ~ nav.menu{
+            max-height:1000px;    
+            opacity:1;
+            padding:20px;         
+        }
+
+     
+        .menu-inner{
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:16px;
+        }
+
+        .menu a{
+            flex:1 1 150px;
+            max-width:180px;
+            text-decoration:none;
+            font-weight:bold;
+            background:#f5f6f8f0;
+            padding:18px;
+            border-radius:14px;
+            text-align:center;
+            color:#000;
+            box-shadow:0 0 15px rgba(0,0,0,.25);
+            transition:transform .25s ease, box-shadow .25s ease, background-color .25s ease, opacity .25s ease;
+            opacity:.98;
+        }
+        .menu a:hover{
+            background:#b6ffd1ff;
+            transform:scale(1.08);
+            box-shadow:0 0 25px rgba(16,132,47,.64);
+        }
+        .menu a:active{
+            transform:scale(.95);
+            box-shadow:0 0 12px rgba(0,0,0,.3);
+        }
+
+    
+        .main{
+            padding:20px;
+            margin:20px;
+            background:#f5f6f8f0;
+            border-radius:16px;
+            box-shadow:0 0 18px rgba(0,0,0,.25);
+        }
+        .footer{
+            background:#376edbf0;
+            text-align:center;
+            padding:12px;
+            border-radius:16px 16px 0 0;
+            box-shadow:0 -2px 12px rgba(0,0,0,.2);
+        }
+
+    
+        .btn{
+            background:#afe5f9fd;
+            border-radius:12px;
+            padding:10px 24px;
+            font-size:16px;
+            text-decoration:none;
+            color:#000;
+            font-weight:bold;
+            box-shadow:0 0 15px rgba(0,0,0,.3);
+            transition:transform .25s, box-shadow .25s, background-color .25s;
+        }
+        .btn:hover{background:#b6ffd1ff; transform:scale(1.08); box-shadow:0 0 25px rgba(16,132,47,.64)}
+        .btn:active{transform:scale(.95)}
+
+        /* АДАПТИВ */
+        @media (min-width: 1000px){
+            /* На широких — меню всегда раскрыто и без кнопки */
+            .menu{max-height:none; opacity:1; padding:20px}
+            .menu-toggle-btn{display:none}
+        }
+
+        @media (max-width: 480px){
+            .header{flex-direction:column; gap:10px; text-align:center}
+            .auth{flex-direction:column}
+        }
+    </style>
+</head>
+<body>
+
+    <input type="checkbox" id="menu-toggle">
+
+    <header class="header">
+        <h1 href="{{ url_for('index') }}"> 🐾 Мой сайт 🐾</h1>
+
+        <label class="menu-toggle-btn" for="menu-toggle">☰ Меню</label>
+
+        <div class="auth">
+            {% if session.get('user') %}
+                <span>Приветствуем, {{ session['user']['name'] }} {{ session['user']['surname'] }}</span>
+                <a class="btn" href="{{ url_for('logout') }}">Выйти</a>
+            {% else %}
+                <a class="btn" href="{{ url_for('login') }}">Вход</a>
+                <a class="btn" href="{{ url_for('registration') }}">Регистрация</a>
+            {% endif %}
+        </div>
+    </header>
+
+    <nav class="menu">
+        <div class="menu-inner">
+            <a href="{{ url_for('index') }}">🏠 Главная</a>
+            <a href="{{ url_for('duck') }}">🦆 Уточки</a>
+            <a href="{{ url_for('fox') }}">🦊 Лисички</a>
+            <a href="{{ url_for('weather_minsk') }}">🌤 Погода Минск</a>
+            <a href="{{ url_for('weather_city') }}">🌍 Погода города</a>
+            <a href="{{ url_for('dogs') }}">🐶 Собаки</a>
+            <a href="{{ url_for('homework') }}">📘 Домашка</a>
+            <a href="{{ url_for('rates') }}">💰 Курсы валют</a>
+            
+        </div>
+    </nav>
+
+    <main class="main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <h3>© 2025 Мой сайт. Все права защищены.</h3>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Лабрадоры{% endblock %}
+
+{% block content %}
+  <style>
+
+    body{ text-align: center;}
+       
+        h1   { color: rgb(82, 59, 22);
+          text-align: center;
+             margin-left: 20px;
+            font-family:Comic Sans MS;  }
+
+        р    { font-family:Comic Sans MS;  
+                font-size: 20px; 
+                margin: 20px; 
+                text-align: justify; 
+                max-width: 900px; 
+                margin-left: auto;
+                margin-right: auto; 
+                border: 3px solid black;  
+                border-radius: 10px;  
+                padding: 10px;}
+
+     img  { border-radius:45px; 
+            width: 100%; 
+            height: 280px;
+            justify-content: center; 
+            object-fit: cover; 
+        }
+    button {  
+        background-color: #d7dbb1fd;
+            border-radius: 12px; 
+            padding: 10px 24px; 
+            font-size: 20px; 
+            margin: 10px;
+            box-shadow: 0 0 15px rgba(174, 237, 226, 0.85);
+            transform: scale(0.95); 
+    }
+        button:hover { background-color: rgb(164, 131, 95); 
+            box-shadow: 0 0 25px rgb(179, 140, 92);
+            transform: scale(1.05); 
+            transition: all 0.3s ease-in-out; }
+
+    </style>
+  <h1>Лабрадор-ретривер</h1>
+  {% if error %}
+    <p style="color:red">{{ error }}</p>
+  {% endif %}
+
+  <div 
+    style="display: grid; grid-template-columns: 1fr 1fr;  align-items: center;  justify-content: center; gap: 20px; margin: 20px auto; max-width: 900px; ">
+    <img  src="{{ url_for('static', filename='labrador.jpg') }}" alt="Лабрадор-ритривет" width="400">
+    <img  src="{{ url_for('static', filename='labradori3.jpg') }}" alt="Лабрадор-ритривет" width="400">
+    <img  src="{{ url_for('static', filename='labradori.jpg') }}" alt="Лабрадор-ритривет" width="400">
+    <img  src="{{ url_for('static', filename='labradorpuppy.jpeg') }}" alt="Лабрадор-ритривет" width="400">
+    </div>
+
+  <p>Лабрадор-ретривер — это воплощение дружелюбия, энергии и преданности. Эта порода собак заслуженно занимает лидирующие позиции по популярности
+      во всем мире, и не зря. Лабрадоры, с их добродушным взглядом и виляющим хвостом, известны своим покладистым характером и интеллектом. 
+      Изначально выведенные как помощники рыбаков в Канаде, они быстро завоевали сердца людей благодаря своим уникальным качествам: неутомимости, 
+      способности к обучению и невероятной любви к людям. Лабрадоры – это верные компаньоны, прекрасные семейные собаки и надежные помощники в 
+      различных сферах деятельности, будь то поисково-спасательная служба, терапия или охота. В 19 веке представители породы попали в Великобританию 
+      и получили признание и любовь местной элиты.  Вес взрослого самца достигает до 40 кг, рост в холке до 63 см. 
+      У самок эти параметры достигают до 35 кг и 60 см. соответственно. Действующий стандарт породы предполагает три варианта окраса – шоколадный, 
+      черный и палевый. Оттенки могут отличаться и допустимо присутствие белого пятна в области груди. Лабрадор Ретривер - это активный, дружелюбный и умный пес. 
+      Из него получится отличный компаньон, а также он может участвовать в поисково - спасательных мероприятиях и в качестве служебной собаки.</p>
+   
+   
+     <button >
+        <a style="font-family:Comic Sans MS; color: black;" href="/">На главную</a>
+        </button>
+{% endblock %}
